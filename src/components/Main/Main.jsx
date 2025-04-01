@@ -1,4 +1,6 @@
-import { useState } from "react";
+{
+  /*import { useState } from "react";*/
+}
 import Card from "./components/Card/Card";
 
 import Avatar from "../../images/Avatar.png";
@@ -27,41 +29,44 @@ const cards = [
 console.log(cards);
 
 const Main = (props) => {
-  const { onClickNewCard, onClickEditProfile, onClickEditAvatar } = props;
+  const { onClickNewCard, onClickEditProfile, onClickEditAvatar, onCardClick } =
+    props;
 
   return (
-    <main className="profile">
-      <img
-        src={Avatar}
-        alt="Foto Jacques Cousteau"
-        className="profile__image"
-        onClick={onClickEditAvatar}
-      />
-      <div className="profile__data">
-        <h1 className="profile__title">Jacques Cousteau</h1>
-        <h2 className="profile__subtitle">Explorador</h2>
-      </div>
-
-      <button className="profile__button-small">
+    <main>
+      <section className="profile">
         <img
-          src={Pen}
-          alt="imagen de lápiz"
-          className="profile__image-small"
-          onClick={onClickEditProfile}
+          src={Avatar}
+          alt="Foto Jacques Cousteau"
+          className="profile__image"
+          onClick={onClickEditAvatar}
         />
-      </button>
-      <button className="profile__button">
-        <img
-          src={ButtonSymbol}
-          alt="símbolo adición"
-          className="button__add"
-          onClick={onClickNewCard}
-        />
-      </button>
+        <div className="profile__data">
+          <h1 className="profile__title">Jacques Cousteau</h1>
+          <h2 className="profile__subtitle">Explorador</h2>
+        </div>
 
-      <section className="card">
+        <button className="profile__button-small">
+          <img
+            src={Pen}
+            alt="imagen de lápiz"
+            className="profile__image-small"
+            onClick={onClickEditProfile}
+          />
+        </button>
+        <button className="profile__button">
+          <img
+            src={ButtonSymbol}
+            alt="símbolo adición"
+            className="button__add"
+            onClick={onClickNewCard}
+          />
+        </button>
+      </section>
+
+      <section className="card__box">
         {cards.map((card) => (
-          <Card key={card._id} card={card} />
+          <Card key={card._id} card={card} onCardClick={onCardClick} />
         ))}
       </section>
     </main>

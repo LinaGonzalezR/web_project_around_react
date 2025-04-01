@@ -8,11 +8,13 @@ import Popup from "./components/Main/Popup/Popup";
 import NewCard from "./components/Main/Popup/NewCard/NewCard";
 import EditProfile from "./components/Main/Popup/EditProfile/EditProfile";
 import EditAvatar from "./components/Main/Popup/EditAvatar/EditAvatar";
+import ImagePopup from "./components/Main/Popup/ImagePopup";
 
 import "./index.css";
 
 function App() {
   const [PopupState, setPopupState] = useState(null);
+  const [cards, setCards] = useState(null);
 
   const popupNewCard = {
     title: "Nuevo lugar",
@@ -37,6 +39,7 @@ function App() {
           onClickNewCard={() => setPopupState(popupNewCard)}
           onClickEditProfile={() => setPopupState(popupEditProfile)}
           onClickEditAvatar={() => setPopupState(popupEditAvatar)}
+          onCardClick={() => setCards}
         ></Main>
         <Footer />
         {PopupState && (
@@ -45,7 +48,10 @@ function App() {
             {PopupState.children}{" "}
           </Popup>
         )}
-        {/*<section className="popup popup__delete" id="popup__delete">
+        <ImagePopup card={cards} onClose={() => setCards(null)} />
+      </div>
+
+      {/*<section className="popup popup__delete" id="popup__delete">
           <div className="popup__container popup__container-delete">
             <div className="popup__close">
               <img
@@ -64,23 +70,8 @@ function App() {
         </section>
 
         
-        <section className="popup popup-image" id="popup-image">
-          <div className="popup__content">
-            <img className="popup__image-big" alt="Imagen ampliada" src="" />
-            <h3 className="popup__title"></h3>
-            <button className="popup__close">
-              <img
-                src="./images/CloseIcon.svg"
-                alt="Icono de cerrar ventana"
-                className="popup__image-close-icon"
-              />
-            </button>
-          </div>
         
-        </section>
-  <section className="card__box"></section>
-        */}
-      </div>
+  <section className="card__box"></section> */}
     </>
   );
 }
