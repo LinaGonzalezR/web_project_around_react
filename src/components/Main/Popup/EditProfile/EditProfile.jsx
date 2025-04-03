@@ -4,7 +4,7 @@ const EditProfile = () => {
   return (
     <div className="popup" id="popup-profile">
       <div className="popup__container">
-        <form className="form" name="form1" id="form1" novalidate>
+        <form className="form" name="form1" id="form1" noValidate>
           <div className="popup__close">
             <img
               src={CloseIcon}
@@ -18,8 +18,8 @@ const EditProfile = () => {
             placeholder="Nombre"
             id="input-nombre"
             className="form__input"
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
             required
             name="name"
           />
@@ -29,8 +29,8 @@ const EditProfile = () => {
             placeholder="Acerca de mí"
             id="input-mi"
             className="form__input"
-            minlength="2"
-            maxlength="200"
+            minLength="2"
+            maxLength="200"
             required
             name="about"
           />

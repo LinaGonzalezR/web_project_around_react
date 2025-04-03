@@ -4,7 +4,7 @@ const EditAvatar = () => {
   return (
     <div className="popup" id="popup-avatar">
       <div className="popup__container">
-        <form className="form" name="form-avatar" id="form-avatar" novalidate>
+        <form className="form" name="form-avatar" id="form-avatar" noValidate>
           <div className="popup__close">
             <img
               src={CloseIcon}

@@ -18,8 +18,8 @@ const NewCard = () => {
             placeholder="Titulo"
             id="input-title"
             className="form__input"
-            minlength="2"
-            maxlength="30"
+            minLength="2"
+            maxLength="30"
             required
             name="name"
           />
