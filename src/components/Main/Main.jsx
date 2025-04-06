@@ -26,8 +26,6 @@ const cards = [
   },
 ];
 
-console.log(cards);
-
 const Main = (props) => {
   const { onClickNewCard, onClickEditProfile, onClickEditAvatar, onCardClick } =
     props;

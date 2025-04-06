@@ -5,8 +5,12 @@ export default function Card(props) {
 
   return (
     <div className="card">
-      <button className="card__delete">
-        <img src={trashIcon} alt="Eliminar Carta" />
+      <button className="card__delete" aria-label="Eliminar">
+        <img
+          src={trashIcon}
+          alt="Eliminar Carta"
+          className="card__delete-icon"
+        />
       </button>
       <img
         className="card__image"
