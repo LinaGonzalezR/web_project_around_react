@@ -50,13 +50,16 @@
   position: absolute;
   top: -50px;
   right: -50px;
-  background-color: transparent;
+  background-color: transparent url=("./images/close.svg") center no-repeat;
+  height: 40px;
+  width: 40px;
 }
 .popup__image-close-icon {
 }
 
 .popup__image {
   width: 40px;
+  background-color: black;
 }
 
 .popup__image-big {
