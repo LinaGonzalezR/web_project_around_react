@@ -50,7 +50,7 @@
   position: absolute;
   top: -50px;
   right: -50px;
-  background-color: transparent url=("./images/close.svg") center no-repeat;
+  /*background-color: transparent url=("./images/close.svg") center no-repeat;*/
   height: 40px;
   width: 40px;
 }
@@ -60,6 +60,10 @@
 .popup__image {
   width: 40px;
   background-color: black;
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  pointer-events: none;
 }
 
 .popup__image-big {
@@ -96,7 +100,8 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 19.94px;
-  width: 358px;
+  max-width: 358px;
+  width: 98%;
   height: 27.26px;
   border-top: none;
   border-left: none;
@@ -180,11 +185,22 @@
     right: 0;
   }
   .popup__image {
-    width: 26px;
+    width: 40px;
+    height: 40px;
+    right: 0px;
+    pointer-events: none;
   }
+  .form {
+    width: 282px;
+  }
+
   .form__popup {
     width: 282px;
     margin-left: 0;
+  }
+  form__input {
+    max-width: 358px;
+    width: 98%;
   }
   .form__tilte {
     font-size: 18px;

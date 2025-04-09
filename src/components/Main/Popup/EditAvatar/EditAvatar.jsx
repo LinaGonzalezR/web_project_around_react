@@ -3,6 +3,11 @@ import CloseIcon from "../../../../images/CloseIcon.svg";
 const EditAvatar = () => {
   return (
     <form className="form" name="form-avatar" id="form-avatar" noValidate>
+      <img
+        src={CloseIcon}
+        alt="Icono de cerrar ventana"
+        className="popup__image"
+      />
       <h3 className="form__title">Actualizar Foto</h3>
       <input
         type="url"
@@ -16,13 +21,11 @@ const EditAvatar = () => {
       <button type="submit" className="button__form button__form_disabled">
         Guardar
       </button>
-      <div className="popup__close">
-        <img
-          src={CloseIcon}
-          alt="Icono de cerrar ventana"
-          className="popup__image"
-        />{" "}
-      </div>
+      <img
+        src={CloseIcon}
+        alt="Icono de cerrar ventana"
+        className="popup__image"
+      />
     </form>
   );
 };

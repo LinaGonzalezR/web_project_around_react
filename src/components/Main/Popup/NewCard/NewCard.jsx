@@ -3,13 +3,11 @@ import CloseIcon from "../../../../images/CloseIcon.svg";
 const NewCard = () => {
   return (
     <form className="form" name="form2" id="form2">
-      <div className="popup__close">
-        <img
-          src={CloseIcon}
-          alt="Icono de cerrar ventana"
-          className="popup__image"
-        />
-      </div>
+      <img
+        src={CloseIcon}
+        alt="Icono de cerrar ventana"
+        className="popup__image"
+      />
       <h3 className="form__title">Nuevo lugar</h3>
       <input
         type="text"

@@ -29,13 +29,12 @@ const EditProfile = () => {
       <button type="submit" className="button__form button__form_disabled">
         Guardar
       </button>
-      <div className="popup__close">
-        <img
-          src={CloseIcon}
-          alt="Icono de cerrar ventana"
-          className="popup__image"
-        />{" "}
-      </div>
+
+      <img
+        src={CloseIcon}
+        alt="Icono de cerrar ventana"
+        className="popup__image"
+      />
     </form>
   );
 };
