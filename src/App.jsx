@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
@@ -7,71 +7,96 @@ import Footer from "./components/Footer/Footer";
 import Popup from "./components/Main/Popup/Popup";
 import NewCard from "./components/Main/Popup/NewCard/NewCard";
 import EditProfile from "./components/Main/Popup/EditProfile/EditProfile";
-import EditAvatar from "./components/Main/Popup/EditAvatar/EditAvatar";
-import ImagePopup from "./components/Main/Popup/ImagePopup";
-
+import api from "./utils/Api";
 import "./index.css";
+import CurrentUserContext from "./contexts/CurrentUserContext";
 
 function App() {
-  const [PopupState, setPopupState] = useState(null);
-  const [cards, setCards] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [cards, setCards] = useState([]);
 
-  const popupNewCard = {
-    title: "Nuevo lugar",
-    children: <NewCard />,
-  };
+  const [popup, setPopup] = useState(null);
 
-  const popupEditProfile = {
-    title: "Editar perfil",
-    children: <EditProfile />,
-  };
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((res) => {
+        console.log("Tarjetas API", res);
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  const popupEditAvatar = {
-    title: "Actualizar foto",
-    children: <EditAvatar />,
-  };
+  useEffect(() => {
+    api
+      .getCards()
+      .then((res) => {
+        console.log("Tarjetas recibidas API", res);
+        setCards(res);
+      })
+      .catch((err) => {
+        console.log("Error al recibir tarjetas", err);
+      });
+  }, []);
+
+  /*function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log("Error al eliminar la tarjeta", err);
+      });
+  }*/
+
+  /*async function handleCardLike(card) {
+    const isLiked = card.isLiked;
+    try {
+      const newCard = await api.changeLikeCardStatus(card._id, !isLiked);
+      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    } catch (err) {
+      console.error(err);
+    }
+
+    await api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? newCard : currentCard
+          )
+        );
+      })
+      .catch((error) => console.error(error));
+  }*/
+
+  function handleOpenPopup(popup) {
+    setPopup(popup);
+  }
 
   return (
     <>
-      <div className="page">
-        <Header />
-        <Main
-          onClickNewCard={() => setPopupState(popupNewCard)}
-          onClickEditProfile={() => setPopupState(popupEditProfile)}
-          onClickEditAvatar={() => setPopupState(popupEditAvatar)}
-          onCardClick={() => setCards}
-        ></Main>
-        <Footer />
-        {PopupState && (
-          <Popup title={PopupState.title} onClose={() => setPopupState(null)}>
-            {" "}
-            {PopupState.children}{" "}
-          </Popup>
-        )}
-        <ImagePopup card={cards} onClose={() => setCards(null)} />
-      </div>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="page">
+          <Header />
+          <Main
+            onOpenPopup={handleOpenPopup}
+            popup={popup}
+            cards={cards}
+            /* onClickNewCard={() => (popupNewCard)}
+            onClickEditProfile={() => setPopupState(popupEditProfile)}
+            onClickEditAvatar={() => setPopupState(popupEditAvatar)}
+            cards={cards}
+            setCards={setCards}*/
+          ></Main>
+          <Footer />
 
-      {/*<section className="popup popup__delete" id="popup__delete">
-          <div className="popup__container popup__container-delete">
-            <div className="popup__close">
-              <img
-
-
-                src="./images/CloseIcon.svg"
-                alt="Icono de cerrar ventana"
-                className="popup__image"
-              />
-            </div>
-            <h3 className="form__title">¿Estás seguro?</h3>
-            <button type="submit" className="button__form">
-              Sí
-            </button>
-          </div>
-        </section>
-
-        
-        
-  <section className="card__box"></section> */}
+          {/*<ImagePopup card={cards} onClose={() => setCards(null)} />*/}
+        </div>
+      </CurrentUserContext.Provider>
     </>
   );
 }

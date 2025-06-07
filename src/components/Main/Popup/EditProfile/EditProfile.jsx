@@ -1,6 +1,8 @@
 import CloseIcon from "../../../../images/CloseIcon.svg";
 
 const EditProfile = () => {
+  const [name, description] = useState(null);
+
   return (
     <form className="form" name="form1" id="form1" noValidate>
       <h3 className="form__title">Editar Perfil</h3>
@@ -29,7 +31,6 @@ const EditProfile = () => {
       <button type="submit" className="button__form button__form_disabled">
         Guardar
       </button>
-
       <img
         src={CloseIcon}
         alt="Icono de cerrar ventana"

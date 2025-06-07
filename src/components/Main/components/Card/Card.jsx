@@ -1,11 +1,38 @@
 import trashIcon from "../../../../images/TrashIcon.svg";
 
 export default function Card(props) {
-  const { name, link, isLiked, onCardClick } = props.card;
+  const {
+    card,
+    onCardClick,
+    onCardLike,
+    onCardDelete,
+    /*onClickNewCard,
+    onClickEditProfile,
+    onClickEditAvatar,
+    onCardClick,
+    cards,*/
+  } = props;
+  const { name, link, isLiked } = card;
+
+  const cardLikeButtonClassName = `card__like-button ${
+    isLiked ? "card__like-button_is-active" : ""
+  }`;
+
+  function handleCardLike() {
+    onCardLike(card);
+  }
+
+  function handleCardDelete() {
+    onCardDelete(card);
+  }
 
   return (
     <div className="card">
-      <button className="card__delete" aria-label="Eliminar">
+      <button
+        className="card__delete"
+        aria-label="Eliminar"
+        onClick={handleCardDelete}
+      >
         <img
           src={trashIcon}
           alt="Eliminar Carta"
@@ -16,11 +43,15 @@ export default function Card(props) {
         className="card__image"
         src={link}
         alt={name}
-        onClick={() => onCardClick(Card)}
+        onClick={() => onCardClick(card)}
       />
       <div className="card__info">
         <h2 className="card__title">{name}</h2>
-        <div className="card__like-icon"></div>
+        <button
+          className={cardLikeButtonClassName}
+          aria-label="Me Gusta"
+          onClick={handleCardLike}
+        ></button>
       </div>
     </div>
   );
