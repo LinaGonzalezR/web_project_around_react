@@ -1,4 +1,4 @@
-import trashIcon from "../../../../images/TrashIcon.svg";
+import trashIcon from "../../../../images/trashIcon.svg";
 
 export default function Card(props) {
   const {

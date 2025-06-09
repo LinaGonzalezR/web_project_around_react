@@ -9,7 +9,7 @@ import EditAvatar from "./Popup/EditAvatar/EditAvatar";
 import EditProfile from "./Popup/EditProfile/EditProfile";
 import Popup from "./Popup/Popup";
 
-const Main = ({ onOpenPopup, onClosePopup, cards, popup }) => {
+const Main = ({ onOpenPopup, onClosePopup, cards, popup, handleCardLike }) => {
   const currentUser = useContext(CurrentUserContext);
   {
     /*const popupNewCard = {
@@ -65,14 +65,13 @@ const Main = ({ onOpenPopup, onClosePopup, cards, popup }) => {
 
       <section className="card__box">
         {cards.map((card) => {
-          const isLiked = card.likes.some(
-            (like) => like._id === currentUser?._id
-          );
           /* const cardLikeButtonClassName = `card__like-button ${
             isLiked ? "card__like-button_is-active" : ""
           }`;*/
           /*return <Card card={card}*/
-          return <Card key={card._id} card={card} />;
+          return (
+            <Card key={card._id} card={card} onCardLike={handleCardLike} />
+          );
         })}
       </section>
       {popup && (

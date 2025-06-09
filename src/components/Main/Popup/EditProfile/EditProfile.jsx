@@ -1,4 +1,5 @@
 import CloseIcon from "../../../../images/CloseIcon.svg";
+import { useState } from "react";
 
 const EditProfile = () => {
   const [name, description] = useState(null);

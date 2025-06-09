@@ -52,7 +52,7 @@ function App() {
       });
   }*/
 
-  /*async function handleCardLike(card) {
+  async function handleCardLike(card) {
     const isLiked = card.isLiked;
     try {
       const newCard = await api.changeLikeCardStatus(card._id, !isLiked);
@@ -60,18 +60,7 @@ function App() {
     } catch (err) {
       console.error(err);
     }
-
-    await api
-      .changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard
-          )
-        );
-      })
-      .catch((error) => console.error(error));
-  }*/
+  }
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -86,6 +75,8 @@ function App() {
             onOpenPopup={handleOpenPopup}
             popup={popup}
             cards={cards}
+            onClosePopup={() => setPopup(null)}
+            handleCardLike={handleCardLike}
             /* onClickNewCard={() => (popupNewCard)}
             onClickEditProfile={() => setPopupState(popupEditProfile)}
             onClickEditAvatar={() => setPopupState(popupEditAvatar)}

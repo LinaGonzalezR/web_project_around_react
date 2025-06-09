@@ -6,7 +6,7 @@ class API {
 
   handleCardLike(card) {
     const isLiked = card.isLiked;
-    return fetch(`${this._baseUrl}/cards/likes/${card._id}`, {
+    return fetch(`${this._baseUrl}/cards/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
     })
