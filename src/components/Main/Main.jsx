@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Card from "./components/Card/Card";
-/*import api from "../../utils/Api";*/
 import Avatar from "../../images/Avatar.png";
 import Pen from "../../images/Pen.png";
 import ButtonSymbol from "../../images/Button-Symbol.svg";
@@ -8,16 +7,22 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import EditAvatar from "./Popup/EditAvatar/EditAvatar";
 import EditProfile from "./Popup/EditProfile/EditProfile";
 import Popup from "./Popup/Popup";
+import NewCard from "./Popup/NewCard/NewCard";
 
-const Main = ({ onOpenPopup, onClosePopup, cards, popup, handleCardLike }) => {
-  const currentUser = useContext(CurrentUserContext);
-  {
-    /*const popupNewCard = {
+const Main = ({
+  onOpenPopup,
+  onClosePopup,
+  cards,
+  popup,
+  handleCardLike,
+  handleCardDelete,
+}) => {
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const popupNewCard = {
     title: "Nuevo lugar",
     children: <NewCard />,
-  
-  };*/
-  }
+  };
 
   const popupEditAvatar = {
     title: "Actualizar foto",
@@ -27,6 +32,21 @@ const Main = ({ onOpenPopup, onClosePopup, cards, popup, handleCardLike }) => {
     title: "Editar Perfil",
     children: <EditProfile />,
   };
+
+  /*async function handleCardLike(card) {
+    const isLiked = card.isLiked;
+
+    await api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? newCard : currentCard
+          )
+        );
+      })
+      .catch((error) => console.error(error));*/
+
   return (
     <main>
       <section className="profile">
@@ -53,7 +73,7 @@ const Main = ({ onOpenPopup, onClosePopup, cards, popup, handleCardLike }) => {
         </button>
         <button
           className="profile__button"
-          onClick={() => console.log("Abrir popup nueva tarjeta")}
+          onClick={() => onOpenPopup(popupNewCard)}
         >
           <img
             src={ButtonSymbol}
@@ -64,22 +84,25 @@ const Main = ({ onOpenPopup, onClosePopup, cards, popup, handleCardLike }) => {
       </section>
 
       <section className="card__box">
-        {cards.map((card) => {
-          /* const cardLikeButtonClassName = `card__like-button ${
+        {cards.map((card) => (
+          /*const cardLikeButtonClassName = `card__like-button ${
             isLiked ? "card__like-button_is-active" : ""
           }`;*/
-          /*return <Card card={card}*/
-          return (
-            <Card key={card._id} card={card} onCardLike={handleCardLike} />
-          );
-        })}
+          /*<Card card={card}*/
+
+          <Card
+            key={card._id}
+            card={card}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+        ))}
+        ;
       </section>
       {popup && (
-        <Popup
-          title={popup.title}
-          onClose={onClosePopup}
-          children={popup.children}
-        />
+        <Popup title={popup.title} onClose={onClosePopup}>
+          {popup.children}
+        </Popup>
       )}
     </main>
   );

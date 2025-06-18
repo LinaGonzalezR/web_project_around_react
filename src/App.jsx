@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";*/
 import { useState, useEffect } from "react";
 
 import Header from "./components/Header/Header";
@@ -14,8 +14,23 @@ import CurrentUserContext from "./contexts/CurrentUserContext";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
-
   const [popup, setPopup] = useState(null);
+
+  const handleUpdateUser = (data) => {
+    (async () => {
+      await api.setUserInfo(data).then((newData) => {
+        setCurrentUser(newData);
+      });
+    })();
+  };
+
+  useEffect(() => {
+    (async () => {
+      await api.getUserInfo().then((data) => {
+        setCurrentUser(data);
+      });
+    })();
+  }, []);
 
   useEffect(() => {
     api
@@ -41,16 +56,9 @@ function App() {
       });
   }, []);
 
-  /*function handleCardDelete(card) {
-    api
-      .deleteCard(card._id)
-      .then(() => {
-        setCards((state) => state.filter((c) => c._id !== card._id));
-      })
-      .catch((err) => {
-        console.log("Error al eliminar la tarjeta", err);
-      });
-  }*/
+  function handleOpenPopup(popup) {
+    setPopup(popup);
+  }
 
   async function handleCardLike(card) {
     const isLiked = card.isLiked;
@@ -62,21 +70,29 @@ function App() {
     }
   }
 
-  function handleOpenPopup(popup) {
-    setPopup(popup);
+  function handleCardDelete(card) {
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log("Error al eliminar la tarjeta", err);
+      });
   }
 
   return (
     <>
-      <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
         <div className="page">
           <Header />
           <Main
+            cards={cards}
             onOpenPopup={handleOpenPopup}
             popup={popup}
-            cards={cards}
             onClosePopup={() => setPopup(null)}
             handleCardLike={handleCardLike}
+            handleCardDelete={handleCardDelete}
             /* onClickNewCard={() => (popupNewCard)}
             onClickEditProfile={() => setPopupState(popupEditProfile)}
             onClickEditAvatar={() => setPopupState(popupEditAvatar)}

@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import CloseIcon from "../../../../images/CloseIcon.svg";
+import api from "../../../../utils/Api";
 
 const NewCard = () => {
   return (

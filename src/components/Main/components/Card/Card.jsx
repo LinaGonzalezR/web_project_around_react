@@ -1,3 +1,6 @@
+import React from "react";
+import { userContext } from "react";
+import CurrentUserContext from "../../../../contexts/CurrentUserContext";
 import trashIcon from "../../../../images/trashIcon.svg";
 
 export default function Card(props) {
@@ -12,7 +15,13 @@ export default function Card(props) {
     onCardClick,
     cards,*/
   } = props;
-  const { name, link, isLiked } = card;
+
+  const { CurrentUserContext } = userContext(CurrentUserContext);
+
+  /*const { name, link, isLiked } = card;*/
+  const { isLiked } = card;
+
+  /*const isLiked = card.likes.some((user) => user.id === currentUser?._id);*/
 
   const cardLikeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_is-active" : ""
@@ -41,16 +50,17 @@ export default function Card(props) {
       </button>
       <img
         className="card__image"
-        src={link}
-        alt={name}
+        src={card.link}
+        alt={card.name}
         onClick={() => onCardClick(card)}
       />
       <div className="card__info">
-        <h2 className="card__title">{name}</h2>
+        <h2 className="card__title">{card.name}</h2>
         <button
           className={cardLikeButtonClassName}
           aria-label="Me Gusta"
           onClick={handleCardLike}
+          src
         ></button>
       </div>
     </div>

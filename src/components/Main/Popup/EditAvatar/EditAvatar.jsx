@@ -1,3 +1,5 @@
+/*import { useRef, useContext }; */
+
 import CloseIcon from "../../../../images/CloseIcon.svg";
 
 const EditAvatar = () => {
