@@ -16,36 +16,24 @@ const Main = ({
   popup,
   handleCardLike,
   handleCardDelete,
+  handleAddCard,
+  handleUpdateAvatar,
 }) => {
   const { currentUser } = useContext(CurrentUserContext);
 
   const popupNewCard = {
     title: "Nuevo lugar",
-    children: <NewCard />,
+    children: <NewCard onSubmit={handleAddCard} />,
   };
 
   const popupEditAvatar = {
     title: "Actualizar foto",
-    children: <EditAvatar />,
+    children: <EditAvatar onSubmit={handleUpdateAvatar} />,
   };
   const popupEditProfile = {
     title: "Editar Perfil",
-    children: <EditProfile />,
+    children: <EditProfile onClose={onClosePopup} />,
   };
-
-  /*async function handleCardLike(card) {
-    const isLiked = card.isLiked;
-
-    await api
-      .changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard
-          )
-        );
-      })
-      .catch((error) => console.error(error));*/
 
   return (
     <main>

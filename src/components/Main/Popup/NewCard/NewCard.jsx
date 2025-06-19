@@ -1,10 +1,8 @@
-import React, { useState } from "react";
 import CloseIcon from "../../../../images/CloseIcon.svg";
-import api from "../../../../utils/Api";
 
-const NewCard = () => {
+const NewCard = ({ onSubmit }) => {
   return (
-    <form className="form" name="form2" id="form2">
+    <form className="form" onSubmit={onSubmit} name="form2" id="form2">
       <img
         src={CloseIcon}
         alt="Icono de cerrar ventana"

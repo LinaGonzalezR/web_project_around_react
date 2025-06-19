@@ -1,30 +1,19 @@
-import React from "react";
-import { userContext } from "react";
+import React, { useContext } from "react";
 import CurrentUserContext from "../../../../contexts/CurrentUserContext";
 import trashIcon from "../../../../images/trashIcon.svg";
 
 export default function Card(props) {
-  const {
-    card,
-    onCardClick,
-    onCardLike,
-    onCardDelete,
-    /*onClickNewCard,
-    onClickEditProfile,
-    onClickEditAvatar,
-    onCardClick,
-    cards,*/
-  } = props;
+  const { card, onCardClick, onCardLike, onCardDelete } = props;
 
-  const { CurrentUserContext } = userContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
-  /*const { name, link, isLiked } = card;*/
-  const { isLiked } = card;
+  const isOwn = card.owner === currentUser?._id;
+  const isLiked = (card.likes || []).some(
+    (user) => user._id === currentUser?._id
+  );
 
-  /*const isLiked = card.likes.some((user) => user.id === currentUser?._id);*/
-
-  const cardLikeButtonClassName = `card__like-button ${
-    isLiked ? "card__like-button_is-active" : ""
+  const cardLikeButtonClassName = `card__like-icon ${
+    isLiked ? "card__like-icon_active" : ""
   }`;
 
   function handleCardLike() {
@@ -37,17 +26,19 @@ export default function Card(props) {
 
   return (
     <div className="card">
-      <button
-        className="card__delete"
-        aria-label="Eliminar"
-        onClick={handleCardDelete}
-      >
-        <img
-          src={trashIcon}
-          alt="Eliminar Carta"
-          className="card__delete-icon"
-        />
-      </button>
+      {isOwn && (
+        <button
+          className="card__delete"
+          aria-label="Eliminar"
+          onClick={handleCardDelete}
+        >
+          <img
+            src={trashIcon}
+            alt="Eliminar Carta"
+            className="card__delete-icon"
+          />
+        </button>
+      )}
       <img
         className="card__image"
         src={card.link}
@@ -60,7 +51,6 @@ export default function Card(props) {
           className={cardLikeButtonClassName}
           aria-label="Me Gusta"
           onClick={handleCardLike}
-          src
         ></button>
       </div>
     </div>

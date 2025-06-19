@@ -1,13 +1,9 @@
-/*import React from "react";*/
 import { useState, useEffect } from "react";
-
+import api from "./utils/Api";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
-import Popup from "./components/Main/Popup/Popup";
-import NewCard from "./components/Main/Popup/NewCard/NewCard";
-import EditProfile from "./components/Main/Popup/EditProfile/EditProfile";
-import api from "./utils/Api";
+
 import "./index.css";
 import CurrentUserContext from "./contexts/CurrentUserContext";
 
@@ -18,10 +14,32 @@ function App() {
 
   const handleUpdateUser = (data) => {
     (async () => {
-      await api.setUserInfo(data).then((newData) => {
+      await api.updateUserInfo(data.name, data.about).then((newData) => {
         setCurrentUser(newData);
       });
     })();
+  };
+
+  const handleAddCard = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const link = event.target.link.value;
+    api.createCard(name, link).then((card) => {
+      setCards((prevCards) => [card, ...prevCards]);
+      setPopup(null);
+    });
+  };
+
+  const handleUpdateAvatar = (data) => {
+    api
+      .updateProfileAvatar(data.avatar)
+      .then((newData) => {
+        setCurrentUser(newData);
+        setPopup(null);
+      })
+      .catch((err) => {
+        console.error("Error al actualizar el avatar", err);
+      });
   };
 
   useEffect(() => {
@@ -63,7 +81,9 @@ function App() {
   async function handleCardLike(card) {
     const isLiked = card.isLiked;
     try {
-      const newCard = await api.changeLikeCardStatus(card._id, !isLiked);
+      const newCard = isLiked
+        ? await api.removeLike(card._id)
+        : await api.likeCard(card._id);
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     } catch (err) {
       console.error(err);
@@ -81,9 +101,23 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit({ name, link }) {
+    api
+      .createCard(name, link)
+      .then((newCard) => {
+        setCards((prevCards) => [newCard, ...prevCards]);
+        setPopup(null);
+      })
+      .catch((err) => {
+        console.log("Error al crear la tarjeta", err);
+      });
+  }
+
   return (
     <>
-      <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+      <CurrentUserContext.Provider
+        value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+      >
         <div className="page">
           <Header />
           <Main
@@ -93,11 +127,9 @@ function App() {
             onClosePopup={() => setPopup(null)}
             handleCardLike={handleCardLike}
             handleCardDelete={handleCardDelete}
-            /* onClickNewCard={() => (popupNewCard)}
-            onClickEditProfile={() => setPopupState(popupEditProfile)}
-            onClickEditAvatar={() => setPopupState(popupEditAvatar)}
-            cards={cards}
-            setCards={setCards}*/
+            handleAddCard={handleAddCard}
+            handleUpdateAvatar={handleUpdateAvatar}
+            handleAddPlaceSubmit={handleAddPlaceSubmit}
           ></Main>
           <Footer />
 
