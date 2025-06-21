@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Card from "./components/Card/Card";
 import Avatar from "../../images/Avatar.png";
 import Pen from "../../images/Pen.png";
+
 import ButtonSymbol from "../../images/Button-Symbol.svg";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import EditAvatar from "./Popup/EditAvatar/EditAvatar";

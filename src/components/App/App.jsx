@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import api from "./utils/Api";
-import Header from "./components/Header/Header";
-import Main from "./components/Main/Main";
-import Footer from "./components/Footer/Footer";
-
-import "./index.css";
-import CurrentUserContext from "./contexts/CurrentUserContext";
+import api from "../../utils/Api";
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import "../../index.css";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -79,7 +78,9 @@ function App() {
   }
 
   async function handleCardLike(card) {
-    const isLiked = card.isLiked;
+    const isLiked = (card.likes || []).some(
+      (like) => like._id === currentUser?._id
+    );
     try {
       const newCard = isLiked
         ? await api.removeLike(card._id)
@@ -132,7 +133,6 @@ function App() {
             handleAddPlaceSubmit={handleAddPlaceSubmit}
           ></Main>
           <Footer />
-
           {/*<ImagePopup card={cards} onClose={() => setCards(null)} />*/}
         </div>
       </CurrentUserContext.Provider>
