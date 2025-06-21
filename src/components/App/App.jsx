@@ -37,7 +37,7 @@ function App() {
         setPopup(null);
       })
       .catch((err) => {
-        console.error("Error al actualizar el avatar", err);
+        console.error(err);
       });
   };
 
@@ -53,7 +53,7 @@ function App() {
     api
       .getUserInfo()
       .then((res) => {
-        console.log("Tarjetas API", res);
+        console.log(res);
         setCurrentUser(res);
       })
       .catch((err) => {
@@ -65,11 +65,11 @@ function App() {
     api
       .getCards()
       .then((res) => {
-        console.log("Tarjetas recibidas API", res);
+        console.log(res);
         setCards(res);
       })
       .catch((err) => {
-        console.log("Error al recibir tarjetas", err);
+        console.log(err);
       });
   }, []);
 
@@ -98,7 +98,7 @@ function App() {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
-        console.log("Error al eliminar la tarjeta", err);
+        console.log(err);
       });
   }
 
@@ -110,7 +110,7 @@ function App() {
         setPopup(null);
       })
       .catch((err) => {
-        console.log("Error al crear la tarjeta", err);
+        console.log(err);
       });
   }
 

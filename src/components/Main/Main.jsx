@@ -74,11 +74,6 @@ const Main = ({
 
       <section className="card__box">
         {cards.map((card) => (
-          /*const cardLikeButtonClassName = `card__like-button ${
-            isLiked ? "card__like-button_is-active" : ""
-          }`;*/
-          /*<Card card={card}*/
-
           <Card
             key={card._id}
             card={card}

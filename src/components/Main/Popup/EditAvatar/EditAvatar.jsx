@@ -40,11 +40,6 @@ const EditAvatar = ({ onSubmit }) => {
       <button type="submit" className="button__form button__form_disabled">
         Guardar
       </button>
-      {/*<img
-        src={CloseIcon}
-        alt="Icono de cerrar ventana"
-        className="popup__image"
-      />*/}
     </form>
   );
 };

@@ -17,7 +17,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("Error al dar like a la tarjeta:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -51,7 +51,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("error:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -72,7 +72,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("error:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -90,7 +90,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("error:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -107,7 +107,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("Error al eliminar la tarjeta:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -124,7 +124,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("Error al dar like a la tarjeta:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -141,7 +141,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("Error al quitar el like a la tarjeta:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
@@ -159,7 +159,7 @@ class API {
         return Promise.reject(`Error: ${res.status}`);
       })
       .catch((error) => {
-        console.error("Error al actualizar el avatar:", error);
+        console.error(error);
         return Promise.reject(error);
       });
   }
