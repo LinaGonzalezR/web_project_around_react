@@ -37,7 +37,7 @@ function App() {
         setPopup(null);
       })
       .catch((err) => {
-        console.error(err);
+        err;
       });
   };
 
@@ -53,11 +53,11 @@ function App() {
     api
       .getUserInfo()
       .then((res) => {
-        console.log(res);
+        res;
         setCurrentUser(res);
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   }, []);
 
@@ -65,11 +65,11 @@ function App() {
     api
       .getCards()
       .then((res) => {
-        console.log(res);
+        res;
         setCards(res);
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   }, []);
 
@@ -78,16 +78,14 @@ function App() {
   }
 
   async function handleCardLike(card) {
-    const isLiked = (card.likes || []).some(
-      (like) => like._id === currentUser?._id
-    );
+    const isLiked = card.isLiked;
     try {
       const newCard = isLiked
         ? await api.removeLike(card._id)
         : await api.likeCard(card._id);
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     } catch (err) {
-      console.error(err);
+      err;
     }
   }
 
@@ -98,7 +96,7 @@ function App() {
         setCards((state) => state.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   }
 
@@ -110,7 +108,7 @@ function App() {
         setPopup(null);
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   }
 

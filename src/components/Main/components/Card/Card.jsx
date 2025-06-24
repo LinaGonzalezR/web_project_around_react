@@ -8,9 +8,7 @@ export default function Card(props) {
   const { currentUser } = useContext(CurrentUserContext);
 
   const isOwn = card.owner === currentUser?._id;
-  const isLiked = (card.likes || []).some(
-    (user) => user._id === currentUser?._id
-  );
+  const isLiked = card.isLiked;
 
   const cardLikeButtonClassName = `card__like-icon ${
     isLiked ? "card__like-icon_active" : ""
