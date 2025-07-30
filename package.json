@@ -2,12 +2,11 @@
   "name": "web_project_around_express",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
     "build": "vite build",
     "start": "node app.js",
-    "lint": "npx eslint .",
+    "lint": "npx eslint .  --fix",
     "preview": "vite preview"
   },
   "dependencies": {
